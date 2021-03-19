@@ -132,6 +132,9 @@ const toggleBreak = () => {
       <div className="row">
         <div className="col">
           <div className="input-group input-group-lg mb-2">
+            <div className='alert alert-message alert-light float-left'>
+              Focus Duration must be between {focusMinMax[0]} and {focusMinMax[1]} minutes
+            </div>
             <span className="input-group-text" data-testid="duration-focus">
               {/* TODO: Update this text to display the current focus session duration */}
               Focus Duration: 25:00
