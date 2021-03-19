@@ -176,6 +176,8 @@ const toggleBreak = () => {
                   type="button"
                   className="btn btn-secondary"
                   data-testid="decrease-break"
+                  onClick={() => handleIncrementClick('break', -1)}
+                  disabled = {breakDuration === breakMinMax[0] || disableButtons}
                 >
                   <span className="oi oi-minus" />
                 </button>
