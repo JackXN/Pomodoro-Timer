@@ -139,7 +139,89 @@ function Pomodoro() {
         crossorigin="anonymous"
       />
       <div className="row">
+
+
         <div className="col">
+          <div
+            className="btn-group btn-group-lg mb-2"
+            role="group"
+            aria-label="Timer controls"
+          >
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-testid="play-pause"
+              title="Start or pause timer"
+              onClick={playPause}
+            >
+              <span
+                className={classNames({
+                  oi: true,
+                  "oi-media-play": !isTimerRunning,
+                  "oi-media-pause": isTimerRunning,
+                })}
+              />
+            </button>
+            {/* TODO: Implement stopping the current focus or break session. and disable the stop button when there is no active session */}
+            {/* TODO: Disable the stop button when there is no active session */}
+            <button
+              type="button"
+              disabled={!isTimerRunning}
+              className="btn btn-secondary"
+              data-testid="stop"
+              title="Stop the session"
+              onClick={() => {
+                setSession(null);
+                setIsTimerRunning(false);
+                setElapsed(0);
+              }}
+            >
+              <span className="oi oi-media-stop" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className='content'>
+        {/* TODO: This area should show only when there is an active focus or break - i.e. the session is running or is paused */}
+        {session && (
+          <div className="row mb-2">
+            <div className="col">
+              {/* TODO: Update message below to include current session (Focusing or On Break) total duration */}
+              <h2 data-testid="session-title">
+                {session && session.label} for{" "}
+                {(
+                  "0" +
+                  (session.label.toLowerCase().indexOf("ocus") > 0
+                    ? focusDuration
+                    : breakDuration)
+                ).substr(-2)}
+                :00 minutes
+              </h2>
+              {/* TODO: Update message below correctly format the time remaining in the current session */}
+              <p className="lead" data-testid="session-sub-title">
+                {session && fmtMSS(session.timeRemaining)} remaining
+              </p>
+            </div>
+          </div>
+        )}
+        {session && (
+          <div className="row mb-2">
+            <div className="col">
+              <div className="progress" style={{ height: "20px" }}>
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow={aria} // TODO: Increase aria-valuenow as elapsed time increases
+                  style={{ width: `${aria}%` }} // TODO: Increase width % as elapsed time increases
+                />
+              </div>
+            </div>
+          </div>
+        )}
+            <div className="timers-container">
+        <div className="timers">
           <div className="input-group input-group-lg mb-2">
             <span className="input-group-text" data-testid="duration-focus">
               {/* TODO: Update this text to display the current focus session duration */}
@@ -210,86 +292,6 @@ function Pomodoro() {
           </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col">
-          <div
-            className="btn-group btn-group-lg mb-2"
-            role="group"
-            aria-label="Timer controls"
-          >
-            <button
-              type="button"
-              className="btn btn-primary"
-              data-testid="play-pause"
-              title="Start or pause timer"
-              onClick={playPause}
-            >
-              <span
-                className={classNames({
-                  oi: true,
-                  "oi-media-play": !isTimerRunning,
-                  "oi-media-pause": isTimerRunning,
-                })}
-              />
-            </button>
-            {/* TODO: Implement stopping the current focus or break session. and disable the stop button when there is no active session */}
-            {/* TODO: Disable the stop button when there is no active session */}
-            <button
-              type="button"
-              disabled={!isTimerRunning}
-              className="btn btn-secondary"
-              data-testid="stop"
-              title="Stop the session"
-              onClick={() => {
-                setSession(null);
-                setIsTimerRunning(false);
-                setElapsed(0);
-              }}
-            >
-              <span className="oi oi-media-stop" />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div>
-        {/* TODO: This area should show only when there is an active focus or break - i.e. the session is running or is paused */}
-        {session && (
-          <div className="row mb-2">
-            <div className="col">
-              {/* TODO: Update message below to include current session (Focusing or On Break) total duration */}
-              <h2 data-testid="session-title">
-                {session && session.label} for{" "}
-                {(
-                  "0" +
-                  (session.label.toLowerCase().indexOf("ocus") > 0
-                    ? focusDuration
-                    : breakDuration)
-                ).substr(-2)}
-                :00 minutes
-              </h2>
-              {/* TODO: Update message below correctly format the time remaining in the current session */}
-              <p className="lead" data-testid="session-sub-title">
-                {session && fmtMSS(session.timeRemaining)} remaining
-              </p>
-            </div>
-          </div>
-        )}
-        {session && (
-          <div className="row mb-2">
-            <div className="col">
-              <div className="progress" style={{ height: "20px" }}>
-                <div
-                  className="progress-bar"
-                  role="progressbar"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  aria-valuenow={aria} // TODO: Increase aria-valuenow as elapsed time increases
-                  style={{ width: `${aria}%` }} // TODO: Increase width % as elapsed time increases
-                />
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

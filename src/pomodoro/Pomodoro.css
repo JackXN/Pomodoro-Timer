@@ -1,6 +1,42 @@
 .pomodoro {
     display: flex;
-    
+    flex-direction: column;
     height: 100vh;
-    background: black;
+  color: white;
+justify-content: center;
+align-items:center;
+background-color:rgb(42,43,43, 0.75);
+;
+box-shadow: 0px 5px 15px black;
+
 }
+
+
+
+  .timers-container {
+      display: flex;
+  }
+
+
+button {
+
+    background: #F15F42 !important;
+    border: 0;
+    outline: none;
+}
+
+/* .button-container {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+} */
+
+.input-group {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 20px;
+
+}
+
+
