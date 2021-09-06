@@ -1,4 +1,4 @@
-# Local Library
+# Pomodoro Timer
 
 > Link to live app: https://awesome-franklin-363254.netlify.app/
 
