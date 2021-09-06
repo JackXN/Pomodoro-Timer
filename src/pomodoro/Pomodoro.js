@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classNames from "../utils/class-names";
 import useInterval from "../utils/useInterval";
+import "./Pomodoro.css"
 
 // These functions are defined outside of the component to insure they do not have access to state
 // and are, therefore more likely to be pure.
